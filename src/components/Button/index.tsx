@@ -5,7 +5,7 @@ import { Container, ButtonText } from './styles';
 
 interface ButtonProps extends RectButtonProperties {
   children: string;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({ children, onPress, ...rest }) => (
