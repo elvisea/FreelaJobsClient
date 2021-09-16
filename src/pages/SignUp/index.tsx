@@ -31,7 +31,7 @@ interface SignUpFormData {
   cpf: string;
   mail: string;
   password: string;
-};
+}
 
 const SignUp: React.FC = () => {
   const navigation = useNavigation();
@@ -42,9 +42,8 @@ const SignUp: React.FC = () => {
     surname,
     cpf,
     mail,
-    password
+    password,
   }: SignUpFormData) {
-
     const data = {
       type: 'add',
       name,
@@ -68,12 +67,12 @@ const SignUp: React.FC = () => {
     const response = await api
       .post('/mobile/requisitions/ReqUserRegister.php', data);
 
-    // Trocar Type: Data.Status da API por Boolean 
-    if (response.data.status === "false") {
+    // Trocar Type: Data.Status da API por Boolean
+    if (response.data.status === 'false') {
       Alert.alert(
         'Erro ao relizar o cadastro',
         'Ocorreu um erro ao fazer cadastro, tente novamente.',
-      )
+      );
     } else {
       Alert.alert(
         'Cadastro realizado com sucesso!',
@@ -81,9 +80,9 @@ const SignUp: React.FC = () => {
         [
           {
             text: 'Fazer Login',
-            onPress: () => navigation.goBack()
-          }
-        ]
+            onPress: () => navigation.goBack(),
+          },
+        ],
       );
     }
   }

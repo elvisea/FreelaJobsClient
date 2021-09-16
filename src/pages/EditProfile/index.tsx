@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAuth } from '../../hooks/auth';
 import { useForm } from 'react-hook-form';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { useAuth } from '../../hooks/auth';
 
 import Button from '../../components/Button';
 import api from '../../services/api';
@@ -37,11 +37,11 @@ const EditProfile: React.FC = () => {
   const { control, handleSubmit } = useForm();
 
   async function handleEditProfile(editData: EditData) {
-    console.log("EDITDATA=> ", editData)
+    console.log('EDITDATA=> ', editData);
     // Telefone, endereço e senha
     // retirar apelido e aniversário
     const data = {
-      type: "update",
+      type: 'update',
       pk: user.data.pk,
       name: user.data.name,
       surname: user.data.surname,
@@ -51,17 +51,17 @@ const EditProfile: React.FC = () => {
       zipcode: user.data.zipcode,
       address_number: user.data.address_number,
       complement: 'Casa',
-      latitude: "-25.43169",
-      longitude: "-49.22403"
-    }
+      latitude: '-25.43169',
+      longitude: '-49.22403',
+    };
 
-    console.log("DATA => Data => ", data)
+    console.log('DATA => Data => ', data);
 
     const response = await api
-      .post('/mobile/requisitions/ReqUserRegister.php', data)
-    console.log("DATA =>",response.data)
+      .post('/mobile/requisitions/ReqUserRegister.php', data);
+    console.log('DATA =>', response.data);
     if (response.data.status === false) {
-      Alert.alert('Edit Profile Error', 'Tente novamente!')
+      Alert.alert('Edit Profile Error', 'Tente novamente!');
     }
   }
 
@@ -78,9 +78,15 @@ const EditProfile: React.FC = () => {
           <Container>
             <Header />
             <ImageUser source={{ uri: user?.data.url_picture }} />
-            <Name>{user?.data.name} {user?.data.surname}</Name>
+            <Name>
+              {user?.data.name}
+              {' '}
+              {user?.data.surname}
+            </Name>
             <CustomerSince>
-              Cliente desde {user?.data.registration_date}
+              Cliente desde
+              {' '}
+              {user?.data.registration_date}
             </CustomerSince>
 
             <CustomerSince>

@@ -10,25 +10,23 @@ interface InputProps extends TextInputProps {
   name: string;
 }
 
-const Input: React.FC<InputProps> = ({ control, name, ...rest }) => {
-  return (
-    <Container>
-      <Controller
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            placeholderTextColor="#787878"
-            style={{ fontFamily: defaultTheme.fonts.regular }}
-            keyboardAppearance="dark"
-            onChangeText={onChange}
-            value={value}
-            {...rest}
-          />
-        )}
-        name={name}
-      />
-    </Container>
-  );
-};
+const Input: React.FC<InputProps> = ({ control, name, ...rest }) => (
+  <Container>
+    <Controller
+      control={control}
+      render={({ field: { onChange, value } }) => (
+        <TextInput
+          placeholderTextColor="#787878"
+          style={{ fontFamily: defaultTheme.fonts.regular }}
+          keyboardAppearance="dark"
+          onChangeText={onChange}
+          value={value}
+          {...rest}
+        />
+      )}
+      name={name}
+    />
+  </Container>
+);
 
 export default Input;

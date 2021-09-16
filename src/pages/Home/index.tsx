@@ -4,13 +4,13 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Image,
-  Alert
+  Alert,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { Controller, useForm } from 'react-hook-form';
 import api from '../../services/api';
-import searchIcon from '../../assets/search-icon.png'
+import searchIcon from '../../assets/search-icon.png';
 
 import {
   CategoryButton,
@@ -21,7 +21,7 @@ import {
   HeaderInput,
   HeaderTitle,
   InputContainer,
-  Title
+  Title,
 } from './styles';
 
 interface IDataInput {
@@ -39,7 +39,7 @@ interface Categories {
       icon_url: string;
     }
   ]
-};
+}
 
 export interface IPartnersByCategory {
   status: boolean;
@@ -60,83 +60,81 @@ export interface IPartnersByCategory {
       url_picture: string;
     }
   ] | [];
-};
+}
 
 const Home: React.FC = () => {
-  const [categories, setCategories] = useState<Categories>()
+  const [categories, setCategories] = useState<Categories>();
 
   const navigation = useNavigation();
   const { control, handleSubmit } = useForm();
 
   useEffect(() => {
     const data = {
-      type: "list_category_values"
-    }
+      type: 'list_category_values',
+    };
     api.post('/mobile/requisitions/ReqEmployees.php ', data)
-      .then(response => setCategories(response.data))
-  }, [])
+      .then((response) => setCategories(response.data));
+  }, []);
 
   // Input Search
   async function searchCategory({ category }: IDataInput) {
     const data = {
-      type: "list_category",
+      type: 'list_category',
       category: '',
-      sub_category: "",
-      is_home_office: "",
-      is_local_office: "",
-      max_price: "",
-      rank: "",
-      max_distance: "150",
-      latitude: "-25.43169",
-      longitude: "-49.22403"
+      sub_category: '',
+      is_home_office: '',
+      is_local_office: '',
+      max_price: '',
+      rank: '',
+      max_distance: '150',
+      latitude: '-25.43169',
+      longitude: '-49.22403',
     };
 
     data.category = category;
 
     const response = await api
-      .post('/mobile/requisitions/ReqEmployees.php', data)
+      .post('/mobile/requisitions/ReqEmployees.php', data);
 
     if (response.data.data.length === 0) {
-      Alert.alert
-        (
-          'Categoria Vazia',
-          'Categoria não possui parceiros. Tente novamente'
-        )
+      Alert.alert(
+        'Categoria Vazia',
+        'Categoria não possui parceiros. Tente novamente',
+      );
     } else {
-      navigation.navigate('SearchResult', response.data)
+      navigation.navigate('SearchResult', response.data);
     }
   }
 
   // Button Cards
   async function handlePartnersLoad(category: string) {
     const data = {
-      type: "list_category",
+      type: 'list_category',
       category: '',
-      sub_category: "",
-      is_home_office: "",
-      is_local_office: "",
-      max_price: "",
-      rank: "",
-      max_distance: "150",
-      latitude: "-25.43169",
-      longitude: "-49.22403"
+      sub_category: '',
+      is_home_office: '',
+      is_local_office: '',
+      max_price: '',
+      rank: '',
+      max_distance: '150',
+      latitude: '-25.43169',
+      longitude: '-49.22403',
     };
 
-    data.category = category
+    data.category = category;
 
     const response = await api
-      .post('/mobile/requisitions/ReqEmployees.php', data)
+      .post('/mobile/requisitions/ReqEmployees.php', data);
 
     if (response.data.data.length === 0) {
-      Alert.alert
-        (
-          'Categoria Vazia',
-          'Categoria não possui parceiros. Tente novamente'
-        )
+      Alert.alert(
+        'Categoria Vazia',
+        'Categoria não possui parceiros. Tente novamente',
+      );
     } else {
-      navigation.navigate('SearchResult', response.data)
+      navigation.navigate('SearchResult', response.data);
     }
-  };
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -147,7 +145,7 @@ const Home: React.FC = () => {
           <InputContainer>
 
             <Controller
-              name='category'
+              name="category"
               control={control}
               rules={{
                 required: true,
@@ -172,7 +170,7 @@ const Home: React.FC = () => {
         <Title>Os mais procurados</Title>
 
         <CategoryContainer>
-          {categories?.data.slice(0, 9).map(category => (
+          {categories?.data.slice(0, 9).map((category) => (
             <CategoryButton
               key={category.token}
               onPress={() => handlePartnersLoad(category.sub_category)}

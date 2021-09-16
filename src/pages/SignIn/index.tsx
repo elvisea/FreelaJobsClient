@@ -54,7 +54,6 @@ const SignIn: React.FC = () => {
           facebook_user_id: '',
           imei: '',
         });
-
       } catch (err) {
         if (user?.status === false) {
           console.log(user.error);
@@ -102,7 +101,8 @@ const SignIn: React.FC = () => {
             />
 
             <ForgotPassword
-              onPress={() => navigation.navigate('RecoverPassword')}>
+              onPress={() => navigation.navigate('RecoverPassword')}
+            >
               <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
             </ForgotPassword>
 
@@ -116,7 +116,8 @@ const SignIn: React.FC = () => {
             <ContainerRegister>
               <RegisterText>Não tem conta? </RegisterText>
               <CreateAccountButton
-                onPress={() => navigation.navigate('SignUp')}>
+                onPress={() => navigation.navigate('SignUp')}
+              >
                 <CreateAccountButtonText>Cadastra-se</CreateAccountButtonText>
               </CreateAccountButton>
             </ContainerRegister>

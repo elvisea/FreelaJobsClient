@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Alert, ScrollView, Text, TouchableOpacity } from 'react-native';
+import {
+  Alert, ScrollView, Text, TouchableOpacity,
+} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import IconFeather from 'react-native-vector-icons/Feather';
 
@@ -17,7 +19,7 @@ import {
   Stars,
   Description,
   ImageContainer,
-  ImageGallery
+  ImageGallery,
 } from './styles';
 
 interface Profile {
@@ -63,18 +65,18 @@ const PartnerProfile: React.FC = () => {
   const route = useRoute();
   const { user } = useAuth();
   const navigation = useNavigation();
-  const [profile, setProfile] = useState<Profile>()
+  const [profile, setProfile] = useState<Profile>();
 
   const { partner } = route.params as RouteParamsPartner;
-  console.log("PARTNER=>", partner)
+  console.log('PARTNER=>', partner);
   useEffect(() => {
     api
       .post('/mobile/requisitions/ReqEmployees.php', {
-        type: "get",
-        pk: partner.pk.toString()
+        type: 'get',
+        pk: partner.pk.toString(),
       })
-      .then(res => setProfile(res.data))
-  }, [])
+      .then((res) => setProfile(res.data));
+  }, []);
 
   // PKS HARDCODE - Retirar Negação !
   function handleChatOrStore() {
@@ -87,44 +89,42 @@ const PartnerProfile: React.FC = () => {
         url_picture: partner.url_picture,
         name: partner.name,
         sub_category: partner.sub_category,
-      }
+      };
 
-      navigation.navigate('Talk', data)
+      navigation.navigate('Talk', data);
     } else {
       Alert.alert('Créditos insuficientes.', 'Adicione creditos para continuar',
         [
           {
-            text: "Inserir",
+            text: 'Inserir',
             onPress: () => navigation.navigate('FreelaStore'),
           },
           {
-            text: "Cancelar",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          }
-        ]
-      )
+            text: 'Cancelar',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+        ]);
     }
   }
 
   async function handleNavigateRating() {
     const data = {
-      type: "get_employee",
-      pk: partner.pk
+      type: 'get_employee',
+      pk: partner.pk,
     };
 
     const response = await api
-      .post('/mobile/requisitions/ReqComments.php', data)
-    console.log("RES=>", response.data);
+      .post('/mobile/requisitions/ReqComments.php', data);
+    console.log('RES=>', response.data);
 
     if (response.data.data.length === 0) {
-      Alert.alert
-        (
-          'Não possui avaliações!',
-          'Este parceiro ainda não tem avaliações'
-        )
+      Alert.alert(
+        'Não possui avaliações!',
+        'Este parceiro ainda não tem avaliações',
+      );
     } else {
-      navigation.navigate('Rating', response.data)
+      navigation.navigate('Rating', response.data);
     }
   }
 
@@ -134,7 +134,11 @@ const PartnerProfile: React.FC = () => {
         <Container>
           <Header />
           <ImageUser source={{ uri: partner?.url_picture }} />
-          <Name>{partner?.name} {partner?.surname}</Name>
+          <Name>
+            {partner?.name}
+            {' '}
+            {partner?.surname}
+          </Name>
           <Work>{partner?.sub_category.toUpperCase()}</Work>
 
           <Stars>
@@ -179,12 +183,12 @@ const PartnerProfile: React.FC = () => {
           <Description>{partner?.description}</Description>
 
           <ImageContainer>
-            {profile?.data.portfolio?.map(url_portfolio =>
+            {profile?.data.portfolio?.map((url_portfolio) => (
               <ImageGallery
                 key={url_portfolio}
                 source={{ uri: url_portfolio }}
               />
-            )}
+            ))}
           </ImageContainer>
 
         </Container>

@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from '../../components/Button';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native';
+import Button from '../../components/Button';
 import { Header } from '../../components/Header';
 
 import {
   Container, TextCredits,
 } from './styles';
-import { Alert } from 'react-native';
 
 const Congratulations: React.FC = () => {
   const navigation = useNavigation();
@@ -15,15 +15,14 @@ const Congratulations: React.FC = () => {
     Alert.alert('Créditos carregados com sucesso', 'Você já pode entrar em contato com o Freela!',
       [
         {
-          text: "Buscar por Freelas",
+          text: 'Buscar por Freelas',
           onPress: () => navigation.navigate('SearchResult'),
         },
         {
-          text: "Ir para o Chat",
+          text: 'Ir para o Chat',
           onPress: () => navigation.navigate('Talk'),
-        }
-      ]
-    )
+        },
+      ]);
   }
 
   return (
@@ -41,7 +40,7 @@ const Congratulations: React.FC = () => {
       <TextCredits>
         Voltar para a busca
       </TextCredits>
-      <Button onPress={() => { navigation.navigate('SearchResult') }}>
+      <Button onPress={() => { navigation.navigate('SearchResult'); }}>
         Ou Nao Carregar
       </Button>
     </Container>
@@ -49,4 +48,4 @@ const Congratulations: React.FC = () => {
 };
 
 export default Congratulations;
-//11991713297
+// 11991713297

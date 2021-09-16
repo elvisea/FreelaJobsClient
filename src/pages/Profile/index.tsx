@@ -25,8 +25,16 @@ const Profile: React.FC = () => {
     <Container>
       <Header />
       <ImageUser source={{ uri: user?.data.url_picture }} />
-      <Name>{user?.data.name} {user?.data.surname}</Name>
-      <CustomerSince>Cliente desde {user?.data.registration_date}</CustomerSince>
+      <Name>
+        {user?.data.name}
+        {' '}
+        {user?.data.surname}
+      </Name>
+      <CustomerSince>
+        Cliente desde
+        {' '}
+        {user?.data.registration_date}
+      </CustomerSince>
 
       <ContainerInfo>
 
@@ -39,7 +47,6 @@ const Profile: React.FC = () => {
           />
           <Info>{user?.data.mail}</Info>
         </InfoLine>
-
 
         <InfoLine>
           <IconFeather
@@ -68,7 +75,11 @@ const Profile: React.FC = () => {
             color={defaultTheme.colors.background}
             style={{ marginRight: 14 }}
           />
-          <Info>{user?.data.ddd_contact} {user?.data.phone_contact}</Info>
+          <Info>
+            {user?.data.ddd_contact}
+            {' '}
+            {user?.data.phone_contact}
+          </Info>
         </InfoLine>
 
         <InfoLine>

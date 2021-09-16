@@ -1,7 +1,9 @@
 import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
-import { Container, Details, Period, Price } from './styles';
+import {
+  Container, Details, Period, Price,
+} from './styles';
 
 interface Props extends TouchableOpacityProps {
   period: string;
@@ -17,6 +19,6 @@ export function SignatureButton({ isActive, period, ...rest }: Props) {
       <Details>+ Detalhes</Details>
     </Container>
   );
-};
+}
 
 export default SignatureButton;

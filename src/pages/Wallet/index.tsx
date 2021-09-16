@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import { Header } from '../../components/Header';
-import carteiraImg from '../../assets/carteira.png'
+import carteiraImg from '../../assets/carteira.png';
 
 import {
   Container,
@@ -23,7 +23,7 @@ import {
   YellowContentLeft,
   YellowContentRight,
   TitleYellowContainer,
-  TextYellowContainer
+  TextYellowContainer,
 } from './styles';
 
 interface Credits {
@@ -40,16 +40,16 @@ interface Credits {
 const Wallet: React.FC = () => {
   const { user } = useAuth();
 
-  const [credits, setCredits] = useState<Credits>()
+  const [credits, setCredits] = useState<Credits>();
 
   useEffect(() => {
     const data = {
-      pk: user.data.pk
-    }
+      pk: user.data.pk,
+    };
 
     api.post('/mobile/requisitions/ReqPocket.php', data)
-      .then(response => setCredits(response.data))
-  }, [])
+      .then((response) => setCredits(response.data));
+  }, []);
 
   return (
     <Container>
@@ -82,7 +82,8 @@ const Wallet: React.FC = () => {
               Indique e ganhe Freela Coins!
             </TitleBlueContainer>
             <TextBlueContainer>
-              Ajude seu amigo indicando o melhor app{'\n'}
+              Ajude seu amigo indicando o melhor app
+              {'\n'}
               de serviços e ganhe 10 Freela coins.
             </TextBlueContainer>
           </LeftContent>
@@ -99,16 +100,16 @@ const Wallet: React.FC = () => {
 
         <YellowContentLeft>
           <TitleYellowContainer>
-            Quer ganhar uns{'\n'}Freela coins na faixa?
+            Quer ganhar uns
+            {'\n'}
+            Freela coins na faixa?
           </TitleYellowContainer>
           <TextYellowContainer>
             Clique assista e ganhe
           </TextYellowContainer>
         </YellowContentLeft>
 
-        <YellowContentRight>
-
-        </YellowContentRight>
+        <YellowContentRight />
 
       </YellowContainer>
     </Container>

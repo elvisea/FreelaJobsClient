@@ -7,7 +7,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
-import searchIcon from '../../assets/search-icon.png'
+import searchIcon from '../../assets/search-icon.png';
 
 import {
   Container,
@@ -29,7 +29,7 @@ import {
   Stars,
   HeaderButton,
   TextHeaderButton,
-  NameAndWork
+  NameAndWork,
 } from './styles';
 
 export interface RouteParams {
@@ -65,43 +65,41 @@ const SearchResult: React.FC = () => {
   const { data } = route.params as RouteParams;
 
   async function searchCategory({ category }: IDataInput) {
-
     const dataSearch = {
-      type: "list_category",
+      type: 'list_category',
       category: '',
-      sub_category: "",
-      is_home_office: "",
-      is_local_office: "",
-      max_price: "",
-      rank: "",
-      max_distance: "150",
-      latitude: "-25.43169",
-      longitude: "-49.22403"
+      sub_category: '',
+      is_home_office: '',
+      is_local_office: '',
+      max_price: '',
+      rank: '',
+      max_distance: '150',
+      latitude: '-25.43169',
+      longitude: '-49.22403',
     };
 
-    dataSearch.category = category
+    dataSearch.category = category;
 
     await api.post('/mobile/requisitions/ReqEmployees.php', dataSearch)
-      .then(response => navigation.navigate('SearchResult', response.data))
+      .then((response) => navigation.navigate('SearchResult', response.data));
   }
 
   function handleChatOrProfile() {
     if (user?.data.have_plan) {
-      navigation.navigate('Talk')
+      navigation.navigate('Talk');
     } else {
       Alert.alert('Créditos insuficientes.', 'Adicione creditos para continuar',
         [
           {
-            text: "Inserir",
+            text: 'Inserir',
             onPress: () => navigation.navigate('FreelaStore'),
           },
           {
-            text: "Cancelar",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          }
-        ]
-      )
+            text: 'Cancelar',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+        ]);
     }
   }
 
@@ -110,7 +108,7 @@ const SearchResult: React.FC = () => {
       <Header>
         <InputContainer>
           <Controller
-            name='category'
+            name="category"
             control={control}
             rules={{
               required: true,
@@ -142,10 +140,11 @@ const SearchResult: React.FC = () => {
 
       <ContentSearchResult>
 
-        {data &&
+        {data
+          && (
           <FlatList
             data={data}
-            keyExtractor={item => item.pk}
+            keyExtractor={(item) => item.pk}
             showsVerticalScrollIndicator={false}
             renderItem={({ item: partner }) => (
               <Content>
@@ -197,7 +196,8 @@ const SearchResult: React.FC = () => {
                     </HeaderButton>
 
                     <HeaderButton
-                      onPress={() => navigation.navigate('PartnerProfile', { partner: partner })}>
+                      onPress={() => navigation.navigate('PartnerProfile', { partner })}
+                    >
                       <TextHeaderButton>Perfil</TextHeaderButton>
                     </HeaderButton>
                   </Buttons>
@@ -208,7 +208,7 @@ const SearchResult: React.FC = () => {
               </Content>
             )}
           />
-        }
+          )}
       </ContentSearchResult>
     </Container>
   );

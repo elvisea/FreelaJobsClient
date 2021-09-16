@@ -9,4 +9,4 @@ export function ReportProfile(): JSX.Element {
       <Header>Report Profile</Header>
     </Container>
   );
-};
+}

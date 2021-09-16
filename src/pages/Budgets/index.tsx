@@ -11,29 +11,27 @@ import {
   Content,
   Name,
   Message,
-  ContentLeft
+  ContentLeft,
 } from './styles';
 
-const Budgets: React.FC = () => {
-  return (
-    <Container>
-      <Header>Budgets</Header>
-      <ContainerChat>
-        <ContainerCard>
-          <ContentLeft>
-            <ImageUser source={{ uri: 'https://github.com/elvisea.png' }} />
-            <Content>
-              <Name>Armin Salahuddin</Name>
-              <Message>Já estou a caminho</Message>
-            </Content>
-          </ContentLeft>
-          <TouchableOpacity>
-            <IconFeather name='more-vertical' color="#0A3FA5" size={28} />
-          </TouchableOpacity>
-        </ContainerCard>
-      </ContainerChat>
-    </Container>
-  );
-};
+const Budgets: React.FC = () => (
+  <Container>
+    <Header>Budgets</Header>
+    <ContainerChat>
+      <ContainerCard>
+        <ContentLeft>
+          <ImageUser source={{ uri: 'https://github.com/elvisea.png' }} />
+          <Content>
+            <Name>Armin Salahuddin</Name>
+            <Message>Já estou a caminho</Message>
+          </Content>
+        </ContentLeft>
+        <TouchableOpacity>
+          <IconFeather name="more-vertical" color="#0A3FA5" size={28} />
+        </TouchableOpacity>
+      </ContainerCard>
+    </ContainerChat>
+  </Container>
+);
 
 export default Budgets;

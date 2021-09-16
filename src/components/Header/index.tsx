@@ -12,6 +12,4 @@ export function Header({ children }: HeaderProps) {
       <HeaderTitle>{children}</HeaderTitle>
     </Container>
   );
-};
-
-
+}
