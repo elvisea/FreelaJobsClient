@@ -1,0 +1,1 @@
+install @react-native-firebase/app

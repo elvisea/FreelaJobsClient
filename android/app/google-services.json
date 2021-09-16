@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "660234828481",
+    "project_id": "freela-jobs",
+    "storage_bucket": "freela-jobs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660234828481:android:b816c81ad337e1cb42b240",
+        "android_client_info": {
+          "package_name": "com.tsproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660234828481-4f1v6pk5ikd5cla5evhe5je4qbcd8gtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBleI7v_bTiOEKqYKMiWHrzXufrofidGbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660234828481-4f1v6pk5ikd5cla5evhe5je4qbcd8gtn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
