@@ -52,7 +52,7 @@ interface User {
   };
   status: boolean;
   error: string;
-};
+}
 
 interface AuthContextData {
   user: User;
@@ -87,22 +87,21 @@ const AuthProvider: React.FC = ({ children }) => {
     type,
     facebook_user_id,
   }: SignInCredentials) {
-
     const data = {
-      mail: mail,
-      password: password,
-      type: type,
-      imei: imei,
-      facebook_user_id: facebook_user_id,
+      mail,
+      password,
+      type,
+      imei,
+      facebook_user_id,
     };
 
     const response = await api
-      .post('/mobile/requisitions/ReqLogin.php', data)
-    setUser(response.data)
+      .post('/mobile/requisitions/ReqLogin.php', data);
+    setUser(response.data);
 
     if (response.data.status === false) {
-      Alert.alert('Falha ao realizar o Login', 'Email ou Senha inválidos. Tente Novamente')
-      return
+      Alert.alert('Falha ao realizar o Login', 'Email ou Senha inválidos. Tente Novamente');
+      return;
     }
 
     await AsyncStorage.setItem(
@@ -128,7 +127,8 @@ const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signIn, signOut, user: user }}>
+      value={{ signIn, signOut, user }}
+    >
       {children}
     </AuthContext.Provider>
   );

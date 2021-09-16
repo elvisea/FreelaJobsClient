@@ -20,6 +20,8 @@ import SearchResult from '../pages/SearchResult';
 import PartnerProfile from '../pages/PartnerProfile';
 import Congratulations from '../pages/Congratulations';
 
+import HomeIcon from '../assets/home-icon.svg';
+
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -35,12 +37,13 @@ export function AppRoutes() {
           height: 70,
           paddingVertical: 0,
         },
-      }}>
+      }}
+    >
       <Screen
         name="Home"
         options={{
           tabBarIcon: (({ size, color }) => (
-            <IconFeather name="home" size={size} color={color} />
+            <HomeIcon name="home" size={size} color={color} />
           )),
         }}
       >
@@ -150,7 +153,7 @@ export function AppRoutes() {
         options={{
           tabBarIcon: (({ size, color }) => (
             <IconFeather name="map-pin" size={size} color={color} />
-          ))
+          )),
         }}
       >
         {() => (
@@ -218,4 +221,4 @@ export function AppRoutes() {
   );
 }
 
-//freelajobs.app@gmail.com
+// freelajobs.app@gmail.com

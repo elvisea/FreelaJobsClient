@@ -14,6 +14,6 @@ export function ButtonOptionCard({ title, isActive, ...rest }: Props) {
       <TextCard isActive={isActive}>{title}</TextCard>
     </Container>
   );
-};
+}
 
 export default ButtonOptionCard;

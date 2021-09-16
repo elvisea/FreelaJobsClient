@@ -12,7 +12,7 @@ import {
   Content,
   Name,
   Message,
-  ContentLeft
+  ContentLeft,
 } from './styles';
 
 export default function Freelas(): JSX.Element {
@@ -30,11 +30,10 @@ export default function Freelas(): JSX.Element {
             </Content>
           </ContentLeft>
           <TouchableOpacity onPress={() => navigation.navigate('Assessment')}>
-            <IconFeather name='more-vertical' color="#0A3FA5" size={28} />
+            <IconFeather name="more-vertical" color="#0A3FA5" size={28} />
           </TouchableOpacity>
         </ContainerCard>
       </ContainerChat>
     </Container>
   );
-};
-
+}

@@ -2,12 +2,13 @@ import { useNavigation, useRoute } from '@react-navigation/core';
 import React from 'react';
 import { Alert, View } from 'react-native';
 
+import { Controller, useForm } from 'react-hook-form';
 import Button from '../../components/Button';
 import { Header } from '../../components/Header';
-import api from '../../services/api';
 import { IRouteParams } from '../Talk';
-import { Controller, useForm } from 'react-hook-form';
-import { Container, ImageUser, InputArea, Name, Profession, } from './styles';
+import {
+  Container, ImageUser, InputArea, Name, Profession,
+} from './styles';
 
 interface ITextArea {
   comment: string;
@@ -20,34 +21,33 @@ export default function Assessment() {
   const params = route.params as IRouteParams;
 
   async function addComment({ comment }: ITextArea) {
-    console.log("COMENTARIO=>", comment)
+    console.log('COMENTARIO=>', comment);
 
     const data = {
-      type: "add",
+      type: 'add',
       pk: params.pk_employee,
-      comment: comment,
-      rate: 5
-    }
+      comment,
+      rate: 5,
+    };
 
     // const response = await api.post('/mobile/requisitions/ReqEmployees.php', data);
-    console.log('DATA=>', data)
+    console.log('DATA=>', data);
 
     Alert
-      .alert
-      (
+      .alert(
         'Avaliação Finalizada com Sucesso!',
         'O Chat ficará aberto por mais 24hrs',
         [
           {
-            text: "Cancelar",
-            style: "cancel"
+            text: 'Cancelar',
+            style: 'cancel',
           },
           {
-            text: "OK",
-            onPress: () => navigation.navigate('Freelas')
+            text: 'OK',
+            onPress: () => navigation.navigate('Freelas'),
           },
-        ]
-      )
+        ],
+      );
   }
 
   return (
@@ -59,7 +59,7 @@ export default function Assessment() {
       <View>
 
         <Controller
-          name='comment'
+          name="comment"
           control={control}
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
@@ -77,4 +77,3 @@ export default function Assessment() {
     </Container>
   );
 }
-

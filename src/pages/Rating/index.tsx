@@ -15,7 +15,7 @@ import {
   Name,
   NameWorkAndStars,
   Stars,
-  TextComment
+  TextComment,
 } from './styles';
 
 export interface IRouteParams {
@@ -46,14 +46,18 @@ export default function Rating(): JSX.Element {
         <FlatList
           data={params.data}
 
-          keyExtractor={item => item.pk}
+          keyExtractor={(item) => item.pk}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: data }) => (
             <Content>
               <ContentHeader>
                 <ImageSearchResult source={{ uri: data.url_picture }} />
                 <NameWorkAndStars>
-                  <Name>{data.name} {data.surname}</Name>
+                  <Name>
+                    {data.name}
+                    {' '}
+                    {data.surname}
+                  </Name>
                   <Stars>
                     <IconFeather
                       name="star"
@@ -97,7 +101,6 @@ export default function Rating(): JSX.Element {
         />
       </ContentSearchResult>
 
-    </Container >
+    </Container>
   );
-};
-
+}

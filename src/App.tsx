@@ -10,26 +10,25 @@ import AppProvider from './hooks';
 import Routes from './routes';
 import defaultTheme from './styles/theme/default';
 
-const App: React.FC = () => {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <NavigationContainer>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={defaultTheme.colors.background}
-        />
-        <AppProvider>
-          <View
-            style={{
-              backgroundColor: defaultTheme.colors.background,
-              flex: 1,
-            }}>
-            <Routes />
-          </View>
-        </AppProvider>
-      </NavigationContainer>
-    </ThemeProvider>
-  );
-};
+const App: React.FC = () => (
+  <ThemeProvider theme={defaultTheme}>
+    <NavigationContainer>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={defaultTheme.colors.background}
+      />
+      <AppProvider>
+        <View
+          style={{
+            backgroundColor: defaultTheme.colors.background,
+            flex: 1,
+          }}
+        >
+          <Routes />
+        </View>
+      </AppProvider>
+    </NavigationContainer>
+  </ThemeProvider>
+);
 
 export default App;

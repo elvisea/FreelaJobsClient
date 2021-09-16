@@ -12,7 +12,7 @@ import {
   Content,
   Name,
   Message,
-  ContentLeft
+  ContentLeft,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 
@@ -32,7 +32,7 @@ const Chat: React.FC = () => {
             </Content>
           </ContentLeft>
           <TouchableOpacity onPress={() => navigation.navigate('Talk')}>
-            <IconFeather name='more-vertical' color="#0A3FA5" size={28} />
+            <IconFeather name="more-vertical" color="#0A3FA5" size={28} />
           </TouchableOpacity>
         </ContainerCard>
       </ContainerChat>

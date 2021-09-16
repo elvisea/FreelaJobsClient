@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 import Button from '../../components/Button';
 import { Header } from '../../components/Header';
@@ -23,26 +23,26 @@ import {
   TextMyCards,
   ContainerMyCards,
   HeaderMyCards,
-  CheckboxContainer
+  CheckboxContainer,
 } from './styles';
 
 const FreelaStore: React.FC = () => {
   const { control, handleSubmit } = useForm();
   const [item, setItem] = useState('');
-  const [signature, setSignature] = useState('')
-  const [card, setCard] = useState('')
+  const [signature, setSignature] = useState('');
+  const [card, setCard] = useState('');
   const [isSelected, setSelection] = useState(false);
 
   function handleSelectItem(value: '10' | '30' | '50' | '300') {
-    setItem(value)
+    setItem(value);
   }
 
   function handleSelectSignature(value: 'anual' | 'semestral' | 'mensal') {
-    setSignature(value)
+    setSignature(value);
   }
 
   function handleSelectCard(value: 'debit' | 'credit') {
-    setCard(value)
+    setCard(value);
   }
 
   return (
@@ -79,8 +79,7 @@ const FreelaStore: React.FC = () => {
               value="300"
               title="Freela Coins"
               isActive={item === '300'}
-              onPress={() => handleSelectItem('300')
-              }
+              onPress={() => handleSelectItem('300')}
             />
           </OptionsContainer>
 
@@ -108,13 +107,13 @@ const FreelaStore: React.FC = () => {
 
           <View style={{ paddingHorizontal: 20, width: '100%' }}>
             <ButtonOptionCard
-              title='Débito'
+              title="Débito"
               isActive={card === 'debit'}
               onPress={() => handleSelectCard('debit')}
             />
 
             <ButtonOptionCard
-              title='Crédito'
+              title="Crédito"
               isActive={card === 'credit'}
               onPress={() => handleSelectCard('credit')}
             />
@@ -132,8 +131,8 @@ const FreelaStore: React.FC = () => {
                 fillColor="#0a3fa5"
                 unfillColor="#FFFFFF"
                 text="**** **** **** 0123"
-                iconStyle={{ borderColor: "#0a3fa5" }}
-                textStyle={{ fontFamily: "JosefinSans-Regular", color: '#0a3fa5' }}
+                iconStyle={{ borderColor: '#0a3fa5' }}
+                textStyle={{ fontFamily: 'JosefinSans-Regular', color: '#0a3fa5' }}
                 onPress={() => { }}
               />
               <TextMyCards>623</TextMyCards>
@@ -145,8 +144,8 @@ const FreelaStore: React.FC = () => {
                 fillColor="#0a3fa5"
                 unfillColor="#FFFFFF"
                 text="**** **** **** 8323"
-                iconStyle={{ borderColor: "#0a3fa5" }}
-                textStyle={{ fontFamily: "JosefinSans-Regular", color: '#0a3fa5' }}
+                iconStyle={{ borderColor: '#0a3fa5' }}
+                textStyle={{ fontFamily: 'JosefinSans-Regular', color: '#0a3fa5' }}
                 onPress={() => { }}
               />
               <TextMyCards>431</TextMyCards>
@@ -158,8 +157,8 @@ const FreelaStore: React.FC = () => {
                 fillColor="#0a3fa5"
                 unfillColor="#FFFFFF"
                 text="**** **** **** 9743"
-                iconStyle={{ borderColor: "#0a3fa5" }}
-                textStyle={{ fontFamily: "JosefinSans-Regular", color: '#0a3fa5' }}
+                iconStyle={{ borderColor: '#0a3fa5' }}
+                textStyle={{ fontFamily: 'JosefinSans-Regular', color: '#0a3fa5' }}
                 onPress={() => { }}
               />
               <TextMyCards>852</TextMyCards>
@@ -204,15 +203,15 @@ const FreelaStore: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   checkboxContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 20,
   },
   checkbox: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   label: {
     margin: 8,

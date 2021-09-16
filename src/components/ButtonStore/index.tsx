@@ -1,7 +1,9 @@
 import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
-import { Container, Price, Coins, Value } from './styles';
+import {
+  Container, Price, Coins, Value,
+} from './styles';
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -10,14 +12,21 @@ interface Props extends TouchableOpacityProps {
   isActive: boolean;
 }
 
-export function ButtonStore({ title, value, price, isActive, ...rest }: Props) {
+export function ButtonStore({
+  title, value, price, isActive, ...rest
+}: Props) {
   return (
     <Container isActive={isActive} {...rest}>
       <Value>{value}</Value>
       <Coins>{title}</Coins>
-      <Price>R$ {price},00</Price>
+      <Price>
+        R$
+        {' '}
+        {price}
+        ,00
+      </Price>
     </Container>
   );
-};
+}
 
 export default ButtonStore;

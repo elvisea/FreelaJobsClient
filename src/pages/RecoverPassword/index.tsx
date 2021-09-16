@@ -2,13 +2,15 @@ import React from 'react';
 import { Alert, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Container, InfoRecoveryText, Recovery, Fields } from './styles';
+import { useForm } from 'react-hook-form';
+import {
+  Container, InfoRecoveryText, Recovery, Fields,
+} from './styles';
 
 import Input from '../../components/Input';
 
 import registerImg from '../../assets/register.png';
 import Button from '../../components/Button';
-import { useForm } from 'react-hook-form';
 
 interface RecoverFormData {
   mail: string;
@@ -48,7 +50,11 @@ const RecoverPassword: React.FC = () => {
   return (
     <Container>
       <Image style={{ marginTop: 62.2 }} source={registerImg} />
-      <Recovery>Recuperar{'\n'}Senha</Recovery>
+      <Recovery>
+        Recuperar
+        {'\n'}
+        Senha
+      </Recovery>
 
       <Fields>
         <InfoRecoveryText>

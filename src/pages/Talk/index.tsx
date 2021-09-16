@@ -5,9 +5,9 @@ import { Alert, TouchableOpacity } from 'react-native';
 import IconFeather from 'react-native-vector-icons/Feather';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+import { ScrollView } from 'react-native-gesture-handler';
 import api from '../../services/api';
 import { Header } from '../../components/Header';
-import { ScrollView } from 'react-native-gesture-handler';
 
 import {
   ChatContainer,
@@ -18,7 +18,7 @@ import {
   MessageContainer,
   MessageContent,
   MessageText,
-  TextEndChat
+  TextEndChat,
 } from './styles';
 
 interface IDataMessage {
@@ -26,7 +26,7 @@ interface IDataMessage {
 }
 
 interface IMessages {
-  message: Array<String>;
+  message: Array<string>;
 }
 
 interface IAddMessage {
@@ -82,25 +82,23 @@ export default function Talk() {
   const navigation = useNavigation();
   const { control, handleSubmit } = useForm();
 
-  const [chat, setChat] = useState<IChat>()
-  const [messages, setMessages] = useState<Array<String>>([])
+  const [chat, setChat] = useState<IChat>();
+  const [messages, setMessages] = useState<Array<string>>([]);
 
   const params = route.params as IRouteParams;
   useEffect(() => {
-
     const data = {
       pk_employee: params.pk_employee.toString(),
       pk_mobile: params.pk_mobile.toString(),
-      type: "get_chat_history",
-    }
+      type: 'get_chat_history',
+    };
 
     api.post('/mobile/requisitions/ReqChat.php', data)
-      .then(response => setChat(response.data))
-
-  }, [])
+      .then((response) => setChat(response.data));
+  }, []);
 
   async function sendMessage(dataMessage: IDataMessage) {
-    setMessages([...messages, dataMessage.message])
+    setMessages([...messages, dataMessage.message]);
 
     const data: IAddMessage = {
       type: 'add_message',
@@ -110,31 +108,29 @@ export default function Talk() {
       message: dataMessage.message,
       sender: 'client',
       time: new Date(),
-      status: 'Received'
+      status: 'Received',
     };
 
     const response = await api.post('/mobile/requisitions/ReqChat.php', data);
-    console.log("RESPONSE =>", response.data);
-
+    console.log('RESPONSE =>', response.data);
   }
 
   function handleEndChat() {
     Alert
-      .alert
-      (
+      .alert(
         'Finalizar Conversa?',
         'Deseja mesmo finalizar esta conversa?',
         [
           {
-            text: "Cancelar",
-            style: "cancel"
+            text: 'Cancelar',
+            style: 'cancel',
           },
           {
-            text: "Finalizar e Avaliar",
-            onPress: () => navigation.navigate('Assessment', params)
+            text: 'Finalizar e Avaliar',
+            onPress: () => navigation.navigate('Assessment', params),
           },
-        ]
-      )
+        ],
+      );
   }
 
   return (
@@ -143,7 +139,7 @@ export default function Talk() {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <ChatContainer>
-          {chat?.data.chat_history.map(message => (
+          {chat?.data.chat_history.map((message) => (
             <MessageContainer sender={message.sender} key={message.id_message}>
               <MessageContent sender={message.sender}>
                 <MessageText sender={message.sender}>
@@ -169,7 +165,7 @@ export default function Talk() {
         </TouchableOpacity>
 
         <Controller
-          name='message'
+          name="message"
           control={control}
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
@@ -192,4 +188,3 @@ export default function Talk() {
     </Container>
   );
 }
-
