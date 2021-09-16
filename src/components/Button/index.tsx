@@ -8,8 +8,8 @@ interface ButtonProps extends RectButtonProperties {
   onPress: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, ...rest }) => (
-  <Container {...rest}>
+const Button: React.FC<ButtonProps> = ({ children, onPress, ...rest }) => (
+  <Container onPress={onPress} {...rest}>
     <ButtonText>{children}</ButtonText>
   </Container>
 );
