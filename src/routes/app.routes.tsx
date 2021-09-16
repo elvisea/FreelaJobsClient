@@ -21,6 +21,7 @@ import PartnerProfile from '../pages/PartnerProfile';
 import Congratulations from '../pages/Congratulations';
 
 import HomeIcon from '../assets/home-icon.svg';
+import { View } from 'react-native';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -43,7 +44,12 @@ export function AppRoutes() {
         name="Home"
         options={{
           tabBarIcon: (({ size, color }) => (
-            <HomeIcon name="home" size={size} color={color} />
+            // <View>
+            //   <HomeIcon color={color} />
+            //   <HomeIcon name="home" size={size} color={color} />
+            //   <HomeIcon />
+            // </View>
+            <IconFeather name="home" size={size} color={color} />
           )),
         }}
       >
