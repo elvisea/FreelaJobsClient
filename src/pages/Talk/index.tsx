@@ -4,6 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Alert, TouchableOpacity } from 'react-native';
 import IconFeather from 'react-native-vector-icons/Feather';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
 
 import { ScrollView } from 'react-native-gesture-handler';
 import api from '../../services/api';
@@ -20,6 +21,8 @@ import {
   MessageText,
   TextEndChat,
 } from './styles';
+import { useAuth } from '../../hooks/auth';
+import { firebase } from '@react-native-firebase/messaging';
 
 interface IDataMessage {
   message: string;
@@ -74,18 +77,22 @@ export interface IRouteParams {
   pk_employee: string;
   url_picture: string;
   name: string;
+  surname: string;
   sub_category: string;
 }
 
 export default function Talk() {
   const route = useRoute();
+  const { user } = useAuth();
   const navigation = useNavigation();
   const { control, handleSubmit } = useForm();
 
   const [chat, setChat] = useState<IChat>();
+  const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState<Array<string>>([]);
 
   const params = route.params as IRouteParams;
+
   useEffect(() => {
     const data = {
       pk_employee: params.pk_employee.toString(),
@@ -97,22 +104,88 @@ export default function Talk() {
       .then((response) => setChat(response.data));
   }, []);
 
+  // useEffect(() => {
+  //   const id = uuid.v4().toString()
+
+
+  // }, [])
+
   async function sendMessage(dataMessage: IDataMessage) {
     setMessages([...messages, dataMessage.message]);
 
-    const data: IAddMessage = {
-      type: 'add_message',
-      pk_mobile: params.pk_mobile.toString(),
-      pk_employee: params.pk_employee.toString(),
-      id_message: uuid.v4().toString(),
-      message: dataMessage.message,
-      sender: 'client',
-      time: new Date(),
-      status: 'Received',
-    };
+    // const data: IAddMessage = {
+    //   type: 'add_message',
+    //   pk_mobile: params.pk_mobile.toString(),
+    //   pk_employee: params.pk_employee.toString(),
+    //   id_message: uuid.v4().toString(),
+    //   message: dataMessage.message,
+    //   sender: 'client',
+    //   time: new Date(),
+    //   status: 'Received',
+    // };
 
-    const response = await api.post('/mobile/requisitions/ReqChat.php', data);
-    console.log('RESPONSE =>', response.data);
+    // const response = await api.post('/mobile/requisitions/ReqChat.php', data);
+    // console.log('RESPONSE =>', response.data);
+
+    const id = `mobile_user${params.pk_mobile}_employer_user${user.data.pk}`;
+    console.log(id);
+
+    const chatExists = (await firestore().collection('chats').doc(id).get()).exists;
+    const id_message = uuid.v4();
+    console.log("id_message", id_message)
+
+    if (chatExists) {
+
+      await firestore()
+        .collection('chats')
+        .doc(id)
+        .update({
+          'data.chat_history': firebase.firestore.FieldValue.arrayUnion({
+            time: new Date(),
+            sender: 'client',
+            status: 'Received',
+            message: dataMessage.message,
+            id_message: id_message,
+          })
+        })
+    } else {
+      await firestore()
+        .collection('chats')
+        .doc(id)
+        .set({
+          data: {
+            mobile_user: {
+              pk: params.pk_mobile,
+              name: params.name,
+              surname: params.surname,
+              url_picture: params.url_picture,
+            },
+            employer_user: {
+              pk: user.data.pk,
+              name: user.data.name,
+              surname: user.data.surname,
+              url_picture: user.data.url_picture,
+            },
+            chat_history: []
+          }
+        })
+
+      await firestore()
+        .collection('chats')
+        .doc(id)
+        .update({
+          'data.chat_history': firebase.firestore.FieldValue.arrayUnion({
+            time: new Date(),
+            sender: 'client',
+            status: 'Received',
+            message: dataMessage.message,
+            id_message: id_message,
+          })
+        })
+        .then(() => {
+          console.log('Chat added!');
+        });
+    }
   }
 
   function handleEndChat() {

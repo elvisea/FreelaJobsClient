@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  // baseURL: 'https://dev.database.freelajobs.com.br',
-  baseURL: 'https://database.freelajobs.com.br',
+  baseURL: 'https://dev.database.freelajobs.com.br',
+  // baseURL: 'https://database.freelajobs.com.br',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',

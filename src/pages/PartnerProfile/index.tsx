@@ -88,6 +88,7 @@ const PartnerProfile: React.FC = () => {
         pk_employee: 225,
         url_picture: partner.url_picture,
         name: partner.name,
+        surname: partner.surname,
         sub_category: partner.sub_category,
       };
 

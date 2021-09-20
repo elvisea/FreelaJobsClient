@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
+import messaging from '@react-native-firebase/messaging';
+
 import {
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -7,8 +11,6 @@ import {
   Alert,
 } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
-import { Controller, useForm } from 'react-hook-form';
 import api from '../../services/api';
 import searchIcon from '../../assets/search-icon.png';
 
@@ -75,6 +77,25 @@ const Home: React.FC = () => {
     api.post('/mobile/requisitions/ReqEmployees.php ', data)
       .then((response) => setCategories(response.data));
   }, []);
+
+  // useEffect(() => {
+  //   const requestPermission = async () => {
+  //     const permissionStatus = await messaging().requestPermission();
+  //     console.log(permissionStatus)
+  //   }
+  //   requestPermission()
+  // }, [])
+
+
+  // useEffect(() => {
+  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
+  //     Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+  //   });
+
+  //   return unsubscribe;
+  // }, []);
+
+
 
   // Input Search
   async function searchCategory({ category }: IDataInput) {
