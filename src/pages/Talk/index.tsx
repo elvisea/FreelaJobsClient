@@ -92,6 +92,7 @@ export default function Talk() {
   const [messages, setMessages] = useState<Array<string>>([]);
 
   const params = route.params as IRouteParams;
+  console.log("PARAMS RECEBIDOS =>", params);
 
   useEffect(() => {
     const data = {
@@ -103,12 +104,6 @@ export default function Talk() {
     api.post('/mobile/requisitions/ReqChat.php', data)
       .then((response) => setChat(response.data));
   }, []);
-
-  // useEffect(() => {
-  //   const id = uuid.v4().toString()
-
-
-  // }, [])
 
   async function sendMessage(dataMessage: IDataMessage) {
     setMessages([...messages, dataMessage.message]);
@@ -127,28 +122,22 @@ export default function Talk() {
     // const response = await api.post('/mobile/requisitions/ReqChat.php', data);
     // console.log('RESPONSE =>', response.data);
 
-    const id = `mobile_user${params.pk_mobile}_employer_user${user.data.pk}`;
-    console.log(id);
+    const id = `employer_user${user.data.pk}_mobile_user${params.pk_mobile}`;
 
-    const chatExists = (await firestore().collection('chats').doc(id).get()).exists;
+    const chatExists = (
+      await
+        firestore()
+          .collection('chats')
+          .doc(id)
+          .get()
+    ).exists;
+
     const id_message = uuid.v4();
     console.log("id_message", id_message)
 
-    if (chatExists) {
+    if (!chatExists) {
 
-      await firestore()
-        .collection('chats')
-        .doc(id)
-        .update({
-          'data.chat_history': firebase.firestore.FieldValue.arrayUnion({
-            time: new Date(),
-            sender: 'client',
-            status: 'Received',
-            message: dataMessage.message,
-            id_message: id_message,
-          })
-        })
-    } else {
+      // Cria o Chat
       await firestore()
         .collection('chats')
         .doc(id)
@@ -182,9 +171,107 @@ export default function Talk() {
             id_message: id_message,
           })
         })
-        .then(() => {
-          console.log('Chat added!');
-        });
+
+
+      const chat_id = uuid.v4();
+      const employerChat = (
+        await
+          firestore()
+            .collection('users_chats')
+            .doc(`employer_user${user.data.pk}`)
+            .get()
+      ).exists;
+
+      const mobileChat = (
+        await
+          firestore()
+            .collection('users_chats')
+            .doc(`mobile_user${params.pk_mobile}`)
+            .get()
+      ).exists;
+
+      console.log('mobileChat =>', mobileChat)
+
+      // Referencia o Chat aos participantes
+      if (!employerChat && !mobileChat) {
+        await firestore()
+          .collection('users_chats')
+          .doc(`employer_user${user.data.pk}`)
+          .set({
+            chats: [
+              {
+                chat_id: chat_id,
+                mobile_user: {
+                  pk: params.pk_mobile,
+                  name: params.name,
+                  surname: params.surname,
+                  url_picture: params.url_picture,
+                },
+              }
+            ]
+          })
+
+        await firestore()
+          .collection('users_chats')
+          .doc(`mobile_user${params.pk_mobile}`)
+          .set({
+            chats: [
+              {
+                chat_id: chat_id,
+                employer_user: {
+                  pk: user.data.pk,
+                  name: user.data.name,
+                  surname: user.data.surname,
+                  url_picture: user.data.url_picture,
+                },
+              }
+            ]
+          })
+      } else {
+        await firestore()
+          .collection('users_chats')
+          .doc(`employer_user${user.data.pk}`)
+          .update({
+            chats: firebase.firestore.FieldValue.arrayUnion({
+              chat_id: chat_id,
+              employer_user: {
+                pk: user.data.pk,
+                name: user.data.name,
+                surname: user.data.surname,
+                url_picture: user.data.url_picture,
+              },
+            })
+          })
+
+        await firestore()
+          .collection('users_chats')
+          .doc(`mobile_user${params.pk_mobile}`)
+          .update({
+            chats: firebase.firestore.FieldValue.arrayUnion({
+              chat_id: chat_id,
+              mobile_user: {
+                pk: params.pk_mobile,
+                name: params.name,
+                surname: params.surname,
+                url_picture: params.url_picture,
+              },
+            })
+          })
+      }
+
+    } else {
+      await firestore()
+        .collection('chats')
+        .doc(id)
+        .update({
+          'data.chat_history': firebase.firestore.FieldValue.arrayUnion({
+            time: new Date(),
+            sender: 'client',
+            status: 'Received',
+            message: dataMessage.message,
+            id_message: id_message,
+          })
+        })
     }
   }
 

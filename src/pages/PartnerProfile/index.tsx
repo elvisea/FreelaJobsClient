@@ -64,6 +64,7 @@ export interface RouteParamsPartner {
 const PartnerProfile: React.FC = () => {
   const route = useRoute();
   const { user } = useAuth();
+  console.log("USER LOGADO =>", user.data)
   const navigation = useNavigation();
   const [profile, setProfile] = useState<Profile>();
 
@@ -82,15 +83,15 @@ const PartnerProfile: React.FC = () => {
   function handleChatOrStore() {
     if (!user?.data.have_plan) {
       const data = {
-        // pk_mobile: user.data.pk,
-        pk_mobile: 9,
-        // pk_employee: partner.pk
-        pk_employee: 225,
+        pk_mobile: partner.pk,
+        pk_employee: user.data.pk,
         url_picture: partner.url_picture,
         name: partner.name,
         surname: partner.surname,
         sub_category: partner.sub_category,
       };
+
+      console.log("DATA ENVIADO =>", data)
 
       navigation.navigate('Talk', data);
     } else {
