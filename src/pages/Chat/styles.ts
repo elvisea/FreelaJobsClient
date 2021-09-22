@@ -45,7 +45,7 @@ export const Name = styled.Text`
   font-size: ${RFValue(11)}px;
 `;
 
-export const Message = styled.Text`
+export const LastMessage = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   color: #0A3FA5;
   font-size: ${RFValue(11)}px;
