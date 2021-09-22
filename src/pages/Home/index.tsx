@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
-import messaging from '@react-native-firebase/messaging';
 
 import {
   TouchableOpacity,
@@ -25,6 +24,7 @@ import {
   InputContainer,
   Title,
 } from './styles';
+import { useAuth } from '../../hooks/auth';
 
 interface IDataInput {
   category: string;
@@ -65,6 +65,8 @@ export interface IPartnersByCategory {
 }
 
 const Home: React.FC = () => {
+  const { user } = useAuth();
+  console.log("USER LOGADO =>", user)
   const [categories, setCategories] = useState<Categories>();
 
   const navigation = useNavigation();
@@ -77,25 +79,6 @@ const Home: React.FC = () => {
     api.post('/mobile/requisitions/ReqEmployees.php ', data)
       .then((response) => setCategories(response.data));
   }, []);
-
-  // useEffect(() => {
-  //   const requestPermission = async () => {
-  //     const permissionStatus = await messaging().requestPermission();
-  //     console.log(permissionStatus)
-  //   }
-  //   requestPermission()
-  // }, [])
-
-
-  // useEffect(() => {
-  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
-  //     Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-  //   });
-
-  //   return unsubscribe;
-  // }, []);
-
-
 
   // Input Search
   async function searchCategory({ category }: IDataInput) {
