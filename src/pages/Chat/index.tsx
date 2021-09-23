@@ -64,6 +64,18 @@ const Chat: React.FC = () => {
       .then((response) => setConversations(response.data));
   }, []);
 
+  function handleTalk(pk_mobile: string) {
+    console.log("PARAMETRO", pk_mobile)
+    const data = {
+      pk_mobile: '233',
+      pk_employee: user.data.pk,
+    };
+
+    console.log("DATA SEND =>", data)
+
+    navigation.navigate('Talk', data)
+  }
+
   return (
     <Container>
       <Header>Conversas</Header>
@@ -85,7 +97,7 @@ const Chat: React.FC = () => {
                 </LastMessage>
               </Content>
             </ContentLeft>
-            <TouchableOpacity onPress={() => navigation.navigate('Talk')}>
+            <TouchableOpacity onPress={() => handleTalk(chat.mobile_user.pk)}>
               <IconFeather name="more-vertical" color="#0A3FA5" size={28} />
             </TouchableOpacity>
           </ContainerCard>

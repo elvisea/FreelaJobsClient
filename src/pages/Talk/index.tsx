@@ -71,9 +71,9 @@ export interface IRouteParams {
   pk_mobile: string;
   pk_employee: string;
   url_picture: string;
-  name: string;
-  surname: string;
-  sub_category: string;
+  name?: string;
+  surname?: string;
+  sub_category?: string;
 }
 
 export default function Talk() {
