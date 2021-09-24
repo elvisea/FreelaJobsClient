@@ -14,7 +14,7 @@ const Politics: React.FC = () => {
   const [politics, setPolitics] = useState<IPolitics>()
 
   useEffect(() => {
-    api.post('/mobile/requisitions/ReqTerms.php', { type: 'term' })
+    api.post('/mobile/requisitions/ReqTerms.php', { type: 'politic' })
       .then(response => setPolitics(response.data))
   }, [])
 
