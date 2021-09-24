@@ -51,20 +51,24 @@ const Chat: React.FC = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
   const [conversations, setConversations] = useState<Conversations>();
+  console.log("=> => =>", conversations)
 
   useEffect(() => {
     const data = {
       type: 'get_chat_list',
       pk_employee: user.data.pk,
+      // pk_employee: '396',
     };
 
-    api.post('/mobile/requisitions/ReqChat.php', data)
+    const response = api.post('/mobile/requisitions/ReqChat.php', data)
       .then((response) => setConversations(response.data));
+
+    console.log(conversations?.data)
   }, []);
 
   function handleTalk(pk_mobile: string) {
     const data = {
-      pk_mobile: '233',
+      pk_mobile: pk_mobile,
       pk_employee: user.data.pk,
     };
 
@@ -76,7 +80,7 @@ const Chat: React.FC = () => {
       <Header>Conversas</Header>
       <ContainerChat>
         {conversations && conversations?.data.map((chat) => (
-          <ContainerCard key={chat.mobile_user.pk}>
+          <ContainerCard key={chat.last_message.id_message}>
             <ContentLeft>
               <ImageUser source={{ uri: chat.mobile_user.url_picture }} />
               <Content>

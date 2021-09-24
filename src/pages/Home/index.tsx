@@ -66,10 +66,11 @@ export interface IPartnersByCategory {
 
 const Home: React.FC = () => {
   const { user } = useAuth();
+  console.log(user)
   const [categories, setCategories] = useState<Categories>();
 
   const navigation = useNavigation();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     const data = {
@@ -98,6 +99,8 @@ const Home: React.FC = () => {
 
     const response = await api
       .post('/mobile/requisitions/ReqEmployees.php', data);
+
+    reset(); // reset input
 
     if (response.data.data.length === 0) {
       Alert.alert(

@@ -80,7 +80,7 @@ export default function Talk() {
   const route = useRoute();
   const { user } = useAuth();
   const navigation = useNavigation();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm();
 
   const [chat, setChat] = useState<IChat>();
   const [messages, setMessages] = useState<Array<string>>([]);
@@ -113,6 +113,8 @@ export default function Talk() {
     };
 
     const response = await api.post('/mobile/requisitions/ReqChat.php', data);
+
+    reset(); // reset input
   }
 
   function handleEndChat() {

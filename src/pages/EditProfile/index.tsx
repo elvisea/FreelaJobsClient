@@ -29,7 +29,7 @@ interface EditData {
 const EditProfile: React.FC = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm();
 
   async function handleEditProfile(editData: EditData) {
     // Telefone, endereço e senha
@@ -52,7 +52,8 @@ const EditProfile: React.FC = () => {
     const response = await api
       .post('/mobile/requisitions/ReqUserRegister.php', data);
 
-    console.log("RESPONSE=>", response.data)
+    reset(); // reset input
+
     if (response.data.status === false) {
       Alert.alert('Edit Profile Error', 'Tente novamente!');
     } else {

@@ -61,7 +61,7 @@ const SearchResult: React.FC = () => {
   const route = useRoute();
   const { user } = useAuth();
   const navigation = useNavigation();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm();
   const { data } = route.params as RouteParams;
 
   async function searchCategory({ category }: IDataInput) {
@@ -82,6 +82,8 @@ const SearchResult: React.FC = () => {
 
     await api.post('/mobile/requisitions/ReqEmployees.php', dataSearch)
       .then((response) => navigation.navigate('SearchResult', response.data));
+
+    reset(); // reset input
   }
 
   function handleChatOrProfile() {
@@ -142,72 +144,72 @@ const SearchResult: React.FC = () => {
 
         {data
           && (
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.pk}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item: partner }) => (
-              <Content>
-                <ContentHeader>
-                  <ImageSearchResult source={{ uri: partner.url_picture }} />
-                  <NameAndWork>
-                    <Name>{partner.name}</Name>
-                    <Work>{partner.sub_category}</Work>
-                    <Stars>
-                      <IconFeather
-                        name="star"
-                        color="#FFBC00"
-                        size={15}
-                        style={{ marginRight: 4 }}
-                      />
-                      <IconFeather
-                        name="star"
-                        color="#FFBC00"
-                        size={15}
-                        style={{ marginRight: 4 }}
-                      />
-                      <IconFeather
-                        name="star"
-                        color="#FFBC00"
-                        size={15}
-                        style={{ marginRight: 4 }}
-                      />
-                      <IconFeather
-                        name="star"
-                        color="#FFBC00"
-                        size={15}
-                        style={{ marginRight: 4 }}
-                      />
-                      <IconFeather
-                        name="star"
-                        color="#FFBC00"
-                        size={15}
-                        style={{ marginRight: 4 }}
-                      />
-                    </Stars>
-                  </NameAndWork>
+            <FlatList
+              data={data}
+              keyExtractor={(item) => item.pk}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item: partner }) => (
+                <Content>
+                  <ContentHeader>
+                    <ImageSearchResult source={{ uri: partner.url_picture }} />
+                    <NameAndWork>
+                      <Name>{partner.name}</Name>
+                      <Work>{partner.sub_category}</Work>
+                      <Stars>
+                        <IconFeather
+                          name="star"
+                          color="#FFBC00"
+                          size={15}
+                          style={{ marginRight: 4 }}
+                        />
+                        <IconFeather
+                          name="star"
+                          color="#FFBC00"
+                          size={15}
+                          style={{ marginRight: 4 }}
+                        />
+                        <IconFeather
+                          name="star"
+                          color="#FFBC00"
+                          size={15}
+                          style={{ marginRight: 4 }}
+                        />
+                        <IconFeather
+                          name="star"
+                          color="#FFBC00"
+                          size={15}
+                          style={{ marginRight: 4 }}
+                        />
+                        <IconFeather
+                          name="star"
+                          color="#FFBC00"
+                          size={15}
+                          style={{ marginRight: 4 }}
+                        />
+                      </Stars>
+                    </NameAndWork>
 
-                  <Buttons>
-                    <HeaderButton
-                      style={{ marginRight: 8 }}
-                      onPress={handleChatOrProfile}
-                    >
-                      <TextHeaderButton>Chat</TextHeaderButton>
-                    </HeaderButton>
+                    <Buttons>
+                      <HeaderButton
+                        style={{ marginRight: 8 }}
+                        onPress={handleChatOrProfile}
+                      >
+                        <TextHeaderButton>Chat</TextHeaderButton>
+                      </HeaderButton>
 
-                    <HeaderButton
-                      onPress={() => navigation.navigate('PartnerProfile', { partner })}
-                    >
-                      <TextHeaderButton>Perfil</TextHeaderButton>
-                    </HeaderButton>
-                  </Buttons>
-                </ContentHeader>
-                <Resume>
-                  <TextResume>{partner.description.slice(0, 100).concat('...')}</TextResume>
-                </Resume>
-              </Content>
-            )}
-          />
+                      <HeaderButton
+                        onPress={() => navigation.navigate('PartnerProfile', { partner })}
+                      >
+                        <TextHeaderButton>Perfil</TextHeaderButton>
+                      </HeaderButton>
+                    </Buttons>
+                  </ContentHeader>
+                  <Resume>
+                    <TextResume>{partner.description.slice(0, 100).concat('...')}</TextResume>
+                  </Resume>
+                </Content>
+              )}
+            />
           )}
       </ContentSearchResult>
     </Container>
