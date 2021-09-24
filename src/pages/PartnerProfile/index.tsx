@@ -64,12 +64,11 @@ export interface RouteParamsPartner {
 const PartnerProfile: React.FC = () => {
   const route = useRoute();
   const { user } = useAuth();
-  console.log("USER LOGADO =>", user.data)
   const navigation = useNavigation();
+  const { partner } = route.params as RouteParamsPartner;
+
   const [profile, setProfile] = useState<Profile>();
 
-  const { partner } = route.params as RouteParamsPartner;
-  console.log('PARTNER=>', partner);
   useEffect(() => {
     api
       .post('/mobile/requisitions/ReqEmployees.php', {
@@ -90,8 +89,6 @@ const PartnerProfile: React.FC = () => {
         surname: partner.surname,
         sub_category: partner.sub_category,
       };
-
-      console.log("DATA ENVIADO =>", data)
 
       navigation.navigate('Talk', data);
     } else {
@@ -118,7 +115,6 @@ const PartnerProfile: React.FC = () => {
 
     const response = await api
       .post('/mobile/requisitions/ReqComments.php', data);
-    console.log('RES=>', response.data);
 
     if (response.data.data.length === 0) {
       Alert.alert(

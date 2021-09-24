@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { Alert, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { useAuth } from '../../hooks/auth';
 
 import Button from '../../components/Button';
@@ -26,18 +26,11 @@ interface EditData {
   password?: string;
 }
 
-interface ResponseData {
-  status: boolean;
-  error: string;
-}
-
 const EditProfile: React.FC = () => {
   const { user } = useAuth();
-  const navigation = useNavigation();
   const { control, handleSubmit } = useForm();
 
   async function handleEditProfile(editData: EditData) {
-    console.log('EDITDATA=> ', editData);
     // Telefone, endereço e senha
     // retirar apelido e aniversário
     const data = {
@@ -54,28 +47,29 @@ const EditProfile: React.FC = () => {
       latitude: '-25.43169',
       longitude: '-49.22403',
     };
-
-    console.log('DATA => Data => ', data);
-
+    console.log(data)
     const response = await api
       .post('/mobile/requisitions/ReqUserRegister.php', data);
-    console.log('DATA =>', response.data);
+
+    console.log("RESPONSE=>", response.data)
     if (response.data.status === false) {
       Alert.alert('Edit Profile Error', 'Tente novamente!');
     }
   }
-
   return (
     <>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         enabled
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
+        {/* <TouchableWithoutFeedback style={{ flex: 1, }} onPress={Keyboard.dismiss}> */}
 
         <ScrollView
-          keyboardShouldPersistTaps="handled"
+          style={{ flex: 1, }}
+        // keyboardShouldPersistTaps="handled"
         >
-          <Container>
+          <Container style={{ flex: 1, }}>
             <Header />
             <ImageUser source={{ uri: user?.data.url_picture }} />
             <Name>
@@ -180,6 +174,7 @@ const EditProfile: React.FC = () => {
             <Button onPress={handleSubmit(handleEditProfile)}>Salvar</Button>
           </Container>
         </ScrollView>
+        {/* </TouchableWithoutFeedback> */}
       </KeyboardAvoidingView>
     </>
   );

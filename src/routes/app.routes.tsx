@@ -2,9 +2,6 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import IconFeather from 'react-native-vector-icons/Feather';
-import AntDesignFeather from 'react-native-vector-icons/AntDesign';
-
 import Chat from '../pages/Chat';
 import Home from '../pages/Home';
 import Talk from '../pages/Talk';
@@ -21,7 +18,11 @@ import PartnerProfile from '../pages/PartnerProfile';
 import Congratulations from '../pages/Congratulations';
 
 import HomeIcon from '../assets/home-icon.svg';
-import { View } from 'react-native';
+import ProfileIcon from '../assets/profile.svg';
+import WalletIcon from '../assets/wallet.svg';
+import FreelasIcon from '../assets/freelas.svg';
+import ChatIcon from '../assets/chat.svg';
+import QRCode from '../assets/qrcode.svg';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -43,14 +44,9 @@ export function AppRoutes() {
       <Screen
         name="Home"
         options={{
-          tabBarIcon: (({ size, color }) => (
-            // <View>
-            //   <HomeIcon color={color} />
-            //   <HomeIcon name="home" size={size} color={color} />
-            //   <HomeIcon />
-            // </View>
-            <IconFeather name="home" size={size} color={color} />
-          )),
+          tabBarIcon: (({ color }) =>
+            <HomeIcon height={26} width={26} color={color} />
+          )
         }}
       >
         {() => (
@@ -119,8 +115,8 @@ export function AppRoutes() {
       <Screen
         name="Profile"
         options={{
-          tabBarIcon: (({ size, color }) => (
-            <IconFeather name="user" size={size} color={color} />
+          tabBarIcon: (({ color }) => (
+            <ProfileIcon height={26} width={26} color={color} />
           )),
         }}
       >
@@ -147,8 +143,8 @@ export function AppRoutes() {
       <Screen
         name="Carteira"
         options={{
-          tabBarIcon: (({ size, color }) => (
-            <AntDesignFeather name="wallet" size={size} color={color} />
+          tabBarIcon: (({ color }) => (
+            <WalletIcon height={26} width={26} color={color} />
           )),
         }}
         component={Wallet}
@@ -157,8 +153,8 @@ export function AppRoutes() {
       <Screen
         name="Freelas"
         options={{
-          tabBarIcon: (({ size, color }) => (
-            <IconFeather name="map-pin" size={size} color={color} />
+          tabBarIcon: (({ color }) => (
+            <FreelasIcon height={26} width={26} color={color} />
           )),
         }}
       >
@@ -184,8 +180,8 @@ export function AppRoutes() {
       <Screen
         name="Chat"
         options={{
-          tabBarIcon: (({ size, color }) => (
-            <IconFeather name="message-circle" size={size} color={color} />
+          tabBarIcon: (({ color }) => (
+            <ChatIcon height={26} width={26} color={color} />
           )),
         }}
       >
@@ -217,8 +213,8 @@ export function AppRoutes() {
       <Screen
         name="QR Code"
         options={{
-          tabBarIcon: (({ size, color }) => (
-            <AntDesignFeather name="qrcode" size={size} color={color} />
+          tabBarIcon: (({ color }) => (
+            <QRCode height={26} width={26} color={color} />
           )),
         }}
         component={QrCode}
@@ -226,5 +222,3 @@ export function AppRoutes() {
     </Navigator>
   );
 }
-
-// freelajobs.app@gmail.com

@@ -51,27 +51,22 @@ const Chat: React.FC = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
   const [conversations, setConversations] = useState<Conversations>();
-  console.log("conversations =>", conversations)
 
   useEffect(() => {
     const data = {
       type: 'get_chat_list',
       pk_employee: user.data.pk,
     };
-    console.log("DATA =>", data);
 
     api.post('/mobile/requisitions/ReqChat.php', data)
       .then((response) => setConversations(response.data));
   }, []);
 
   function handleTalk(pk_mobile: string) {
-    console.log("PARAMETRO", pk_mobile)
     const data = {
       pk_mobile: '233',
       pk_employee: user.data.pk,
     };
-
-    console.log("DATA SEND =>", data)
 
     navigation.navigate('Talk', data)
   }

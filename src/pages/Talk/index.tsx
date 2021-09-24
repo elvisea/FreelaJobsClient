@@ -79,17 +79,13 @@ export interface IRouteParams {
 export default function Talk() {
   const route = useRoute();
   const { user } = useAuth();
-  console.log("USER LOGADO =>", user);
   const navigation = useNavigation();
   const { control, handleSubmit } = useForm();
 
   const [chat, setChat] = useState<IChat>();
   const [messages, setMessages] = useState<Array<string>>([]);
-  console.log("MESSAGES=>", messages)
 
   const params = route.params as IRouteParams;
-  console.log("PARAMS RECEBIDOS =>", params);
-  console.log("CHAT =>", chat);
 
   useEffect(() => {
     const data = {
@@ -97,7 +93,6 @@ export default function Talk() {
       pk_mobile: params.pk_mobile.toString(),
       type: 'get_chat_history',
     };
-    console.log("DATA =>", data);
 
     api.post('/mobile/requisitions/ReqChat.php', data)
       .then((response) => setChat(response.data));
@@ -118,7 +113,6 @@ export default function Talk() {
     };
 
     const response = await api.post('/mobile/requisitions/ReqChat.php', data);
-    console.log('RESPONSE =>', response.data);
   }
 
   function handleEndChat() {

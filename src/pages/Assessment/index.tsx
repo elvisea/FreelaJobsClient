@@ -21,8 +21,6 @@ export default function Assessment() {
   const params = route.params as IRouteParams;
 
   async function addComment({ comment }: ITextArea) {
-    console.log('COMENTARIO=>', comment);
-
     const data = {
       type: 'add',
       pk: params.pk_employee,
@@ -31,8 +29,6 @@ export default function Assessment() {
     };
 
     // const response = await api.post('/mobile/requisitions/ReqEmployees.php', data);
-    console.log('DATA=>', data);
-
     Alert
       .alert(
         'Avaliação Finalizada com Sucesso!',
