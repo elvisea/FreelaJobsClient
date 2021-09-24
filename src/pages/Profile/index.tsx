@@ -55,7 +55,7 @@ const Profile: React.FC = () => {
             color={defaultTheme.colors.background}
             style={{ marginRight: 14 }}
           />
-          <Info>0010010001-01</Info>
+          <Info>{user.data.cpf}</Info>
         </InfoLine>
 
         <InfoLine>
@@ -65,7 +65,7 @@ const Profile: React.FC = () => {
             color={defaultTheme.colors.background}
             style={{ marginRight: 14 }}
           />
-          <Info>{user?.data.nick_name}</Info>
+          <Info>{user?.data.nick_name ? user?.data.nick_name : 'Não tem apelido'}</Info>
         </InfoLine>
 
         <InfoLine>
@@ -76,9 +76,9 @@ const Profile: React.FC = () => {
             style={{ marginRight: 14 }}
           />
           <Info>
-            {user?.data.ddd_contact}
+            {user?.data.ddd}
             {' '}
-            {user?.data.phone_contact}
+            {user?.data.phone}
           </Info>
         </InfoLine>
 
@@ -99,7 +99,7 @@ const Profile: React.FC = () => {
             color={defaultTheme.colors.background}
             style={{ marginRight: 14 }}
           />
-          <Info>Rua , 2022 - apto 22</Info>
+          <Info>{user.data.address}, {user.data.address_number}</Info>
         </InfoLine>
         <InfoLine>
           <IconFeather

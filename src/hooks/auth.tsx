@@ -35,8 +35,6 @@ interface User {
     birthdate: string;
     ddd: number;
     phone: number;
-    ddd_contact: string;
-    phone_contact: string;
     rg: string;
     cpf: string;
     address: string;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { Alert, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { useAuth } from '../../hooks/auth';
 
 import Button from '../../components/Button';
@@ -28,6 +28,7 @@ interface EditData {
 
 const EditProfile: React.FC = () => {
   const { user } = useAuth();
+  const navigation = useNavigation();
   const { control, handleSubmit } = useForm();
 
   async function handleEditProfile(editData: EditData) {
@@ -54,6 +55,15 @@ const EditProfile: React.FC = () => {
     console.log("RESPONSE=>", response.data)
     if (response.data.status === false) {
       Alert.alert('Edit Profile Error', 'Tente novamente!');
+    } else {
+      Alert.alert('Profile editado com sucesso!', 'Você editou seu perfil.',
+        [
+          {
+            text: 'Buscar por Freelas',
+            onPress: () => navigation.navigate('Home'),
+          }
+        ]
+      );
     }
   }
   return (
