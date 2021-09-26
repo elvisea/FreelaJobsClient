@@ -19,7 +19,7 @@ import {
   Stars,
   Description,
   ImageContainer,
-  ImageGallery,
+  ImagePortfolio,
 } from './styles';
 
 interface Profile {
@@ -129,7 +129,7 @@ const PartnerProfile: React.FC = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView style={{ backgroundColor: '#fff' }}>
+      <ScrollView style={{ backgroundColor: '#f7f7f7' }}>
         <Container>
           <Header />
           <ImageUser source={{ uri: partner?.url_picture }} />
@@ -183,7 +183,7 @@ const PartnerProfile: React.FC = () => {
 
           <ImageContainer>
             {profile?.data.portfolio?.map((url_portfolio) => (
-              <ImageGallery
+              <ImagePortfolio
                 key={url_portfolio}
                 source={{ uri: url_portfolio }}
               />

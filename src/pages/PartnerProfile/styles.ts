@@ -3,7 +3,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #fff;
+  background-color: #f7f7f7;
   align-items: center;
   padding-bottom: ${RFValue(16)}px;
 `;
@@ -38,7 +38,7 @@ export const Stars = styled.View`
 
 export const Description = styled.Text`
   color: #0a3fa5;
-  text-align: left;
+  text-align: center;
   padding: 0 ${RFValue(24)}px;
   font-size: ${RFValue(14)}px;
   margin-top: ${RFValue(16)}px;
@@ -53,9 +53,10 @@ export const ImageContainer = styled.View`
   justify-content: space-between;
   padding: 0 ${RFValue(8)}px; 
   margin-top: ${RFValue(20)}px;
+  width: 100%;
 `;
 
-export const ImageGallery = styled.Image`
+export const ImagePortfolio = styled.Image`
   width: ${RFValue(110)}px;
   height: ${RFValue(86)}px;
   margin-top: ${RFValue(8)}px;
