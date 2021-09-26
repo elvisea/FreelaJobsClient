@@ -17,6 +17,7 @@ import {
   ContentLeft,
 } from './styles';
 import api from '../../services/api';
+import { FlatList } from 'react-native-gesture-handler';
 
 interface Conversations {
   status: boolean;
@@ -79,28 +80,36 @@ const Chat: React.FC = () => {
     <Container>
       <Header>Conversas</Header>
       <ContainerChat>
-        {conversations && conversations?.data.map((chat) => (
-          <ContainerCard key={chat.last_message.id_message}>
-            <ContentLeft>
-              <ImageUser source={{ uri: chat.mobile_user.url_picture }} />
-              <Content>
-                <Name>
-                  {chat.mobile_user.name ? chat.mobile_user.name : 'NOME VAZIO'}
-                </Name>
-                <LastMessage>
-                  {
-                    chat.last_message.message
-                      ? chat.last_message.message.slice(0, 28)
-                      : 'Ultima Mensagem Vazia...'
-                  }
-                </LastMessage>
-              </Content>
-            </ContentLeft>
-            <TouchableOpacity onPress={() => handleTalk(chat.mobile_user.pk)}>
-              <IconFeather name="more-vertical" color="#0A3FA5" size={28} />
-            </TouchableOpacity>
-          </ContainerCard>
-        ))}
+        {conversations &&
+          <FlatList
+            style={{width: "100%"}}
+            data={conversations.data}
+            keyExtractor={(item) => item.last_message.id_message}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item: chat }) => (
+              <ContainerCard>
+                <ContentLeft>
+                  <ImageUser source={{ uri: chat.mobile_user.url_picture }} />
+                  <Content>
+                    <Name>
+                      {chat.mobile_user.name ? chat.mobile_user.name : 'NOME VAZIO'}
+                    </Name>
+                    <LastMessage>
+                      {
+                        chat.last_message.message
+                          ? chat.last_message.message.slice(0, 28)
+                          : 'Ultima Mensagem Vazia...'
+                      }
+                    </LastMessage>
+                  </Content>
+                </ContentLeft>
+                <TouchableOpacity onPress={() => handleTalk(chat.mobile_user.pk)}>
+                  <IconFeather name="more-vertical" color="#0A3FA5" size={28} />
+                </TouchableOpacity>
+              </ContainerCard>
+            )}
+          />
+        }
       </ContainerChat>
     </Container>
   );

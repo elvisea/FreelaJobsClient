@@ -13,7 +13,7 @@ export const ContainerChat = styled.View`
 `;
 
 export const ContainerCard = styled.View`
-  height: ${RFValue(82)}px;
+  height: ${RFValue(65)}px;
   width: ${RFValue(340)}px;
   border-radius: ${RFValue(17.33)}px;
   background-color: #fff;
