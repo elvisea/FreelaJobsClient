@@ -82,7 +82,7 @@ const Chat: React.FC = () => {
       <ContainerChat>
         {conversations &&
           <FlatList
-            style={{width: "100%"}}
+            style={{ width: "100%" }}
             data={conversations.data}
             keyExtractor={(item) => item.last_message.id_message}
             showsVerticalScrollIndicator={false}
@@ -92,7 +92,10 @@ const Chat: React.FC = () => {
                   <ImageUser source={{ uri: chat.mobile_user.url_picture }} />
                   <Content>
                     <Name>
-                      {chat.mobile_user.name ? chat.mobile_user.name : 'NOME VAZIO'}
+                      {chat.mobile_user.name
+                        ? chat.mobile_user.name
+                        : 'NOME VAZIO'
+                      }
                     </Name>
                     <LastMessage>
                       {

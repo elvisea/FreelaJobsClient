@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
 import {
-  Container, Price, Coins, Value,
+  Container, Price, Coins, Value, Tip,
 } from './styles';
 
 interface Props extends TouchableOpacityProps {
@@ -20,10 +20,7 @@ export function ButtonStore({
       <Value>{value}</Value>
       <Coins>{title}</Coins>
       <Price>
-        R$
-        {' '}
-        {price}
-        ,00
+        R$  {' '} {price} ,00
       </Price>
     </Container>
   );

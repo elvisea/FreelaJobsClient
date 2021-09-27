@@ -41,7 +41,6 @@ const Wallet: React.FC = () => {
   const { user } = useAuth();
 
   const [credits, setCredits] = useState<Credits>();
-
   useEffect(() => {
     const data = {
       pk: user.data.pk,

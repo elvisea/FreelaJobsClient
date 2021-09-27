@@ -11,7 +11,7 @@ export const Container = styled(TouchableOpacity) <PropsItem>`
   align-items: center;
   justify-content: center;
   height: ${RFValue(100)}px;
-  margin-bottom: ${RFValue(8)}px;
+  margin-bottom: ${RFValue(32)}px;
   border-radius: ${RFValue(10)}px;
   border-color: #787878;
   border-style: solid;
@@ -37,6 +37,16 @@ export const Price = styled.Text`
   color: #0A3FA5;
   line-height: ${RFValue(15.6)}px;
   font-size: ${RFValue(12)}px;
-  font-family: ${({ theme }) => theme.fonts.bold};  
+  font-family: ${({ theme }) => theme.fonts.bold}; 
+  
+`;
+
+export const Tip = styled.View`
+  height: ${RFValue(25)}px;
+  width: ${RFValue(112)}px;
+  background-color: #FB1716;
+  margin-bottom: -${RFValue(46)}px;
+  border-radius: ${RFValue(8)}px;
+  color: ${({ theme }) => theme.colors.orange};
 `;
 

@@ -14,27 +14,25 @@ export const Text = styled.Text`
   text-align: center;
   font-size: ${RFValue(20)}px;
   margin-top: ${RFValue(16)}px;
+  margin-bottom: ${RFValue(2)}px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+`;
+
+export const InProgress = styled.Text`
+  color: #FF0000;
+  text-align: center;
+  font-size: ${RFValue(20)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
 export const OptionsContainer = styled.View`
+  flex: 1;
   flex-wrap: wrap;
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: ${RFValue(8)}px;
+  margin-top: ${RFValue(6)}px;
   padding: 0 ${RFValue(20)}px;
-  margin-bottom: ${RFValue(8)}px;
-`;
-
-export const SignatureContainer = styled.View`
-  width: 100%;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-top: ${RFValue(8)}px;
-  padding: 0 ${RFValue(20)}px;
-  margin-bottom: ${RFValue(8)}px;
 `;
 
 export const Signature = styled(RectButton)`
@@ -45,28 +43,6 @@ export const Signature = styled(RectButton)`
   margin-top: ${RFValue(8)}px;
   border-radius: ${RFValue(10)}px;
   background: ${({ theme }) => theme.colors.orange};
-`;
-
-export const PaymentOptionText = styled.Text`
-  color: #0a3fa5;
-  text-align: center;
-  font-size: ${RFValue(14)}px;
-  margin-top: ${RFValue(16)}px;
-  font-family: ${({ theme }) => theme.fonts.bold};
-`;
-
-export const Label = styled.Text`
-  color: #0a3fa5;
-  text-align: center;
-  font-size: ${RFValue(12)}px;
-  font-family: ${({ theme }) => theme.fonts.regular};
-`;
-
-export const ContainerInputs = styled.View`
-  width: 100%;
-  align-items: flex-start;
-  padding: 0 ${RFValue(20)}px;
-  margin-top: ${RFValue(16)}px;
 `;
 
 export const OptionCard = styled(RectButton)`
@@ -84,33 +60,3 @@ export const TextOptionCard = styled.Text`
   font-size: ${RFValue(12)}px;
   font-family: ${({ theme }) => theme.fonts.regular};
 `;
-
-export const ContainerMyCards = styled.View`
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  padding: 0 ${RFValue(20)}px;
-  margin: ${RFValue(16)}px 0;
-`;
-
-export const HeaderMyCards = styled.View`
-  width: 100%;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-export const TextMyCards = styled.Text`
-  color: #0a3fa5;
-  font-size: ${RFValue(14)}px;
-  margin-bottom: ${RFValue(8)}px;
-  font-family: ${({ theme }) => theme.fonts.regular};
-`;
-
-export const CheckboxContainer = styled.View`
-  width: 100%;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
