@@ -83,15 +83,16 @@ export default function Talk() {
   const { control, handleSubmit, reset } = useForm();
 
   const [chat, setChat] = useState<IChat>();
+  chat && console.log("chat => ", chat)
   const [messages, setMessages] = useState<Array<string>>([]);
 
   const params = route.params as IRouteParams;
 
   useEffect(() => {
     const data = {
-      pk_employee: params.pk_employee.toString(),
-      pk_mobile: params.pk_mobile.toString(),
       type: 'get_chat_history',
+      pk_mobile: user.data.pk,
+      pk_employee: params.pk_employee.toString(),
     };
 
     api.post('/mobile/requisitions/ReqChat.php', data)

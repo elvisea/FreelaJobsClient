@@ -83,12 +83,9 @@ const PartnerProfile: React.FC = () => {
   function handleChatOrStore() {
     if (!user?.data.have_plan) {
       const data = {
-        pk_mobile: partner.pk,
-        pk_employee: user.data.pk,
-        url_picture: partner.url_picture,
-        name: partner.name,
-        surname: partner.surname,
-        sub_category: partner.sub_category,
+        type: "get_chat_history",
+        pk_mobile: user.data.pk,
+        pk_employee: partner.pk,
       };
 
       navigation.navigate('Talk', data);

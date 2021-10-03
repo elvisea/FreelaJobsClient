@@ -52,13 +52,12 @@ const Chat: React.FC = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
   const [conversations, setConversations] = useState<Conversations>();
-  console.log("=> => =>", conversations)
+  conversations && console.log("=> => =>", conversations)
 
   useEffect(() => {
     const data = {
       type: 'get_chat_list',
-      pk_employee: user.data.pk,
-      // pk_employee: '396',
+      pk_mobile: user.data.pk,
     };
 
     const response = api.post('/mobile/requisitions/ReqChat.php', data)
@@ -67,12 +66,14 @@ const Chat: React.FC = () => {
     console.log(conversations?.data)
   }, []);
 
-  function handleTalk(pk_mobile: string) {
+  function handleTalk(pk_employee: string) {
     const data = {
-      pk_mobile: pk_mobile,
-      pk_employee: user.data.pk,
+      type: "get_chat_history",
+      // pk_mobile: user.data.pk,
+      pk_employee: pk_employee,
     };
 
+    console.log("Dados Repassados => ", data)
     navigation.navigate('Talk', data)
   }
 
@@ -106,7 +107,7 @@ const Chat: React.FC = () => {
                     </LastMessage>
                   </Content>
                 </ContentLeft>
-                <TouchableOpacity onPress={() => handleTalk(chat.mobile_user.pk)}>
+                <TouchableOpacity onPress={() => handleTalk(chat.employee_user.pk)}>
                   <IconFeather name="more-vertical" color="#0A3FA5" size={28} />
                 </TouchableOpacity>
               </ContainerCard>
