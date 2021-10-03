@@ -32,6 +32,7 @@ const EditProfile: React.FC = () => {
   const { control, handleSubmit, reset } = useForm();
 
   async function handleEditProfile(editData: EditData) {
+    console.log("EDIT => ", editData);
     // Telefone, endereço e senha
     // retirar apelido e aniversário
     const data = {
@@ -48,9 +49,23 @@ const EditProfile: React.FC = () => {
       latitude: '-25.43169',
       longitude: '-49.22403',
     };
-    console.log(data)
+    console.log("DATA => ", data)
     const response = await api
       .post('/mobile/requisitions/ReqUserRegister.php', data);
+    console.log("RES => ", response.data);
+
+    if (editData.password) {
+      const data = {
+        type: "update_password",
+        pk: user.data.pk,
+        password: editData.password,
+      }
+
+      const response = await api
+        .post('/mobile/requisitions/ReqUserRegister.php', data);
+      console.log("RES PASS =>", response.data)
+    }
+
 
     reset(); // reset input
 
@@ -74,7 +89,6 @@ const EditProfile: React.FC = () => {
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        {/* <TouchableWithoutFeedback style={{ flex: 1, }} onPress={Keyboard.dismiss}> */}
 
         <ScrollView
           style={{ flex: 1, }}
@@ -185,7 +199,6 @@ const EditProfile: React.FC = () => {
             <Button onPress={handleSubmit(handleEditProfile)}>Salvar</Button>
           </Container>
         </ScrollView>
-        {/* </TouchableWithoutFeedback> */}
       </KeyboardAvoidingView>
     </>
   );
