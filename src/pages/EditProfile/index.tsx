@@ -41,8 +41,8 @@ const EditProfile: React.FC = () => {
       name: user.data.name,
       surname: user.data.surname,
       ddd: user.data.ddd,
-      phone: editData.phone,
-      address: editData.address,
+      phone: editData.phone ? editData.phone : user.data.phone,
+      address: editData.address ? editData.address : user.data.address,
       zipcode: user.data.zipcode,
       address_number: user.data.address_number,
       complement: 'Casa',
@@ -50,6 +50,7 @@ const EditProfile: React.FC = () => {
       longitude: '-49.22403',
     };
     console.log("DATA => ", data)
+    console.log("Typeof => ", typeof data.phone)
     const response = await api
       .post('/mobile/requisitions/ReqUserRegister.php', data);
     console.log("RES => ", response.data);
@@ -156,7 +157,7 @@ const EditProfile: React.FC = () => {
 
               <InputApp
                 name="phone"
-                placeholder="Phone"
+                placeholder="Telefone"
                 control={control}
                 autoCorrect={false}
                 autoCapitalize="none"
@@ -164,19 +165,9 @@ const EditProfile: React.FC = () => {
                 returnKeyType="next"
               />
 
-              {/* <InputApp
-                name="birthdate"
-                placeholder="Birth Date"
-                control={control}
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="numeric"
-                returnKeyType="next"
-              /> */}
-
               <InputApp
                 name="address"
-                placeholder="Address"
+                placeholder="Endereço"
                 control={control}
                 autoCorrect={false}
                 autoCapitalize="none"
@@ -186,7 +177,7 @@ const EditProfile: React.FC = () => {
 
               <InputApp
                 name="password"
-                placeholder="Senha"
+                placeholder="Senha (Opcional)"
                 control={control}
                 autoCorrect={false}
                 autoCapitalize="none"
