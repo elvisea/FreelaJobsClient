@@ -66,7 +66,6 @@ export interface IPartnersByCategory {
 
 const Home: React.FC = () => {
   const { user } = useAuth();
-  console.log(user)
   const [categories, setCategories] = useState<Categories>();
 
   const navigation = useNavigation();

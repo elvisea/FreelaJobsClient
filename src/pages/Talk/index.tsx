@@ -83,7 +83,6 @@ export default function Talk() {
   const { control, handleSubmit, reset } = useForm();
 
   const [chat, setChat] = useState<IChat>();
-  chat && console.log("chat => ", chat)
   const [messages, setMessages] = useState<Array<string>>([]);
 
   const params = route.params as IRouteParams;

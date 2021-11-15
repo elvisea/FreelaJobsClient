@@ -1,4 +1,4 @@
-package com.tsproject;
+package com.freela.jobs;
 
 import com.facebook.react.ReactActivity;
 

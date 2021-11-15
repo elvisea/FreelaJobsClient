@@ -66,8 +66,6 @@ const PartnerProfile: React.FC = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
   const { partner } = route.params as RouteParamsPartner;
-  console.log("PARTNER", partner)
-  console.log("USER", user)
   const [profile, setProfile] = useState<Profile>();
 
   useEffect(() => {

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 import IconFeather from 'react-native-vector-icons/Feather';
-import firestore from '@react-native-firebase/firestore';
 import { Header } from '../../components/Header';
 import { useAuth } from '../../hooks/auth';
 
@@ -52,7 +51,6 @@ const Chat: React.FC = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
   const [conversations, setConversations] = useState<Conversations>();
-  conversations && console.log("=> => =>", conversations)
 
   useEffect(() => {
     const data = {
@@ -62,8 +60,6 @@ const Chat: React.FC = () => {
 
     const response = api.post('/mobile/requisitions/ReqChat.php', data)
       .then((response) => setConversations(response.data));
-
-    console.log(conversations?.data)
   }, []);
 
   function handleTalk(pk_employee: string) {
@@ -73,7 +69,6 @@ const Chat: React.FC = () => {
       pk_employee: pk_employee,
     };
 
-    console.log("Dados Repassados => ", data)
     navigation.navigate('Talk', data)
   }
 

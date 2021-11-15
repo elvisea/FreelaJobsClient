@@ -56,7 +56,6 @@ const SignIn: React.FC = () => {
         });
       } catch (err) {
         if (user?.status === false) {
-          console.log(user.error);
           Alert.alert('Erro na autenticação', 'Ocorreu um erro ao fazer login');
         }
 

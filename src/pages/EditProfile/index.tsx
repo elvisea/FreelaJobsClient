@@ -32,7 +32,6 @@ const EditProfile: React.FC = () => {
   const { control, handleSubmit, reset } = useForm();
 
   async function handleEditProfile(editData: EditData) {
-    console.log("EDIT => ", editData);
     // Telefone, endereço e senha
     // retirar apelido e aniversário
     const data = {
@@ -49,11 +48,8 @@ const EditProfile: React.FC = () => {
       latitude: '-25.43169',
       longitude: '-49.22403',
     };
-    console.log("DATA => ", data)
-    console.log("Typeof => ", typeof data.phone)
     const response = await api
       .post('/mobile/requisitions/ReqUserRegister.php', data);
-    console.log("RES => ", response.data);
 
     if (editData.password) {
       const data = {
@@ -64,7 +60,6 @@ const EditProfile: React.FC = () => {
 
       const response = await api
         .post('/mobile/requisitions/ReqUserRegister.php', data);
-      console.log("RES PASS =>", response.data)
     }
 
 
