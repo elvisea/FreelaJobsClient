@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Header } from '../../components/Header';
 import ButtonStore from '../../components/ButtonStore';
+
+import Purchases from 'react-native-purchases';
+import { API_KEY } from '../../constants';
 
 import {
   Container,
@@ -18,6 +21,26 @@ const FreelaStore: React.FC = () => {
   const [signature, setSignature] = useState('');
   const [card, setCard] = useState('');
   const [isSelected, setSelection] = useState(false);
+
+  useEffect(() => {
+    Purchases.setDebugLogsEnabled(true)
+    Purchases.setup(API_KEY)
+    console.log("Entrou no UseEffect")
+
+    const getPackages = async () => {
+      try {
+        const offerings = await Purchases.getOfferings();
+
+        if (offerings.current !== null) {
+          console.log("TEM ALGO", offerings)
+        }
+
+      } catch (error) {
+        console.error("=> => ", error)
+      }
+    }
+    getPackages()
+  }, [])
 
   function handleSelectItem(value: '10' | '30' | '50' | '300') {
     setItem(value);
@@ -40,6 +63,7 @@ const FreelaStore: React.FC = () => {
 
         <OptionsContainer>
           <ButtonStore
+            style={{ elevation: 1.5, shadowColor: '#000' }}
             price={10}
             value="10"
             title="Freela Coins"

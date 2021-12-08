@@ -178,6 +178,7 @@ const Home: React.FC = () => {
           {categories?.data.slice(0, 9).map((category) => (
             <CategoryButton
               key={category.token}
+              style={{ elevation: 1.5, shadowColor: '#000' }}
               onPress={() => handlePartnersLoad(category.sub_category)}
             >
               <CategoryButtonText>

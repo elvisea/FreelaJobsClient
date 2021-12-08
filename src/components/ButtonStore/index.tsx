@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
 import {
-  Container, Price, Coins, Value, Tip,
+  Container, Price, Coins, Value,
 } from './styles';
 
 interface Props extends TouchableOpacityProps {
