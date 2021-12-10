@@ -14,6 +14,7 @@ import {
   InProgress,
   OptionsContainer,
 } from './styles';
+import { Alert } from 'react-native';
 
 const FreelaStore: React.FC = () => {
   const { control, handleSubmit } = useForm();
@@ -21,25 +22,24 @@ const FreelaStore: React.FC = () => {
   const [signature, setSignature] = useState('');
   const [card, setCard] = useState('');
   const [isSelected, setSelection] = useState(false);
+  const [packages, setPackages] = useState([]);
 
   useEffect(() => {
-    Purchases.setDebugLogsEnabled(true)
-    Purchases.setup(API_KEY)
-    console.log("Entrou no UseEffect")
-
+    // Get current available packages
     const getPackages = async () => {
       try {
         const offerings = await Purchases.getOfferings();
-
-        if (offerings.current !== null) {
-          console.log("TEM ALGO", offerings)
+        console.log("offerings =>", offerings)
+        if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
+          console.log(offerings.current.availablePackages);
         }
-
       } catch (error) {
-        console.error("=> => ", error)
+        console.log(error)
+        Alert.alert('Error getting offers');
       }
-    }
-    getPackages()
+    };
+
+    getPackages();
   }, [])
 
   function handleSelectItem(value: '10' | '30' | '50' | '300') {
